@@ -1,6 +1,6 @@
 import requests
-import json
 import pandas as pd
+from pathlib import Path
 
 # Base URL for your layer
 base_url = "https://services9.arcgis.com/xSsJeibXqRtsnmY7/ArcGIS/rest/services/Hydrogen_Infrastructure_Map_2024Q4_WFL1/FeatureServer/7/query"
@@ -129,6 +129,7 @@ TSO_dict = {
 
 df['country'] = df['Promoter_N'].map(TSO_dict)
 
-# Save to CSV
-df.to_csv('pipeline_project.csv')
-print(f"Saved {len(df)} records to pipeline_project.csv")
+# Save to CSV in the data folder
+out_path = Path(__file__).resolve().parent.parent / "data" / "pipeline_project.csv"
+df.to_csv(out_path)
+print(f"Saved {len(df)} records to {out_path}")

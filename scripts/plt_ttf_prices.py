@@ -4,8 +4,9 @@ from matplotlib import pyplot as plt
 
 
 def plot_gas_prices(save_dir: Path, save_format: str = "pdf"):
-    plt.rcParams["font.family"] = "Arial"
-    plt.rcParams["font.sans-serif"] = ["Arial"]
+    # Use Arial when installed, otherwise fall back to a similar font
+    plt.rcParams["font.family"] = "sans-serif"
+    plt.rcParams["font.sans-serif"] = ["Arial", "Liberation Sans", "DejaVu Sans"]
 
     ttf = yf.Ticker("TTF=F")
     ttf_hist = ttf.history(period="10y")
@@ -23,7 +24,6 @@ def plot_gas_prices(save_dir: Path, save_format: str = "pdf"):
         transform=ax.transAxes,
         fontsize=14,
         fontweight="bold",
-        family="Arial",
         ha="left",
         va="bottom",
         clip_on=False,
@@ -35,7 +35,6 @@ def plot_gas_prices(save_dir: Path, save_format: str = "pdf"):
         "(EUR/MWh)",
         transform=ax.transAxes,
         fontsize=12,
-        family="Arial",
         ha="left",
         va="bottom",
         color="gray",

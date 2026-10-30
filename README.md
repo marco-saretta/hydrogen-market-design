@@ -1,71 +1,97 @@
-# Designing European Hydrogen Markets: Perspectives from Transmission System Operators
+# Towards European Hydrogen Market Design: Perspectives from Transmission System Operators
 
-This repository contains the data, scripts, and supplementary material for the paper:
+[![DOI](https://img.shields.io/badge/DOI-10.1016%2Fj.enpol.2026.115634-blue)](https://doi.org/10.1016/j.enpol.2026.115634)
+[![Code license: MIT](https://img.shields.io/badge/code%20license-MIT-green)](LICENSE)
+[![Paper license: CC BY 4.0](https://img.shields.io/badge/paper%20license-CC%20BY%204.0-lightgrey)](https://creativecommons.org/licenses/by/4.0/)
 
-> **Designing European Hydrogen Markets: Perspectives from Transmission System Operators**
-> Marco Saretta, Enrica Raheli, Jalal Kazempour - 
+This repository contains the figures, data, scripts, survey questionnaire and supplementary material for the paper:
+
+> Marco Saretta, Enrica Raheli, Jalal Kazempour (2027).
+> **Towards European hydrogen market design: Perspectives from transmission system operators.**
+> *Energy Policy*, 220, 115634. <https://doi.org/10.1016/j.enpol.2026.115634>
+
+The article is open access.
 
 ## Overview
 
-The paper investigates the transferability of EU natural gas market mechanisms to emerging hydrogen networks, based on a structured survey of seven European gas Transmission System Operators (TSOs) across six countries. It assesses how established frameworks (covering market and regulatory design, capacity allocation, tariffs, and balancing) may be maintained, adapted, or fundamentally redesigned for hydrogen.
+Only a small share of renewable hydrogen projects in Europe have reached final investment decision, partly because it is unclear how future hydrogen markets will be designed and operated. This study asks how far hydrogen market design can be adapted from existing EU natural gas markets, and which challenges early hydrogen markets must address.
+
+The analysis is based on a structured survey of **seven European gas Transmission System Operators (TSOs) from six countries** (Belgium, Denmark, France, Germany, Lithuania and the Netherlands). It covers five areas: market and regulatory design, trading, capacity allocation, tariffs, and balancing.
+
+### Key findings
+
+- Core design principles, such as **entry-exit systems, virtual trading points and over-the-counter trading**, transfer from natural gas.
+- **Capacity allocation** needs targeted adaptation to couple better with electricity markets.
+- **Tariffs** need intertemporal cost allocation to protect early network users.
+- **Balancing** needs redesign: three Member States chose three different models. A hydrogen balancing Network Code is needed before networks interconnect.
+- Main challenges for early markets: variable renewable supply against stable industrial demand, limited flexibility (scarce storage, low linepack), fragmented regional clusters, and regulatory uncertainty.
 
 ## Repository structure
+
 ```
-├── data/
-│       capacity.csv              # Capacity-related survey data
-│       data.csv                  # Main processed dataset
-│       pipeline_project.csv      # European hydrogen pipeline project data
-│
-├── figures/                      # All figures presented in the paper (PDF)
-│
-├── scripts/
-│       api_pipelines.py          # Fetches pipeline project data via API
-│       plot_capacity.py          # Generates capacity-related figures
-│       plot_SBS.py               # Generates the side-by-side comparison plot
-│       plt_ttf_prices.py         # Generates the TTF price figure
-│
-├── supplementary_material/
-│       supplementary_material_hydrogen_market.pdf
-│
-└── survey/
-        EU_Gas_TSO_Hydrogen_questionnaire.pdf   # Survey instrument distributed to TSOs
+├── data/                     # Input data for the plots
+├── figures/                  # Figures from the paper and supplementary material
+├── paper/                    # Published article (open access)
+├── scripts/                  # Python scripts for data download and plots
+├── supplementary_material/   # Background on EU gas market concepts
+└── survey/                   # Questionnaire sent to the TSOs
 ```
 
-## Reproducing the figures
+## Reproducing the plots
 
-The scripts require Python and dependencies are managed with [uv](https://github.com/astral-sh/uv). To set up the environment:
+The scripts need Python 3.12 or later. Dependencies are managed with [uv](https://github.com/astral-sh/uv):
+
 ```bash
-# Install uv if not already available
-pip install uv
-
-# Install project dependencies from pyproject.toml
-uv sync
+pip install uv   # if uv is not installed yet
+uv sync          # install dependencies from pyproject.toml / uv.lock
 ```
 
-Then run any script individually, for example:
+Then run any script, for example:
+
 ```bash
 uv run scripts/plot_capacity.py
+uv run scripts/plot_SBS.py
 uv run scripts/plt_ttf_prices.py
 ```
 
-Output figures are written to the `figures/` folder.
+Plots are saved to `figures/`. Notes:
 
-## Data and anonymity
+- `plt_ttf_prices.py` downloads TTF prices from Yahoo Finance (via `yfinance`) for the last 10 years, so the result changes with the run date.
+- `api_pipelines.py` queries the online Hydrogen Infrastructure Map and overwrites `data/pipeline_project.csv`.
 
-Survey responses are attributed at the country level only. Individual TSO and respondent identities are not disclosed, in line with the anonymity guarantees provided to participants at the time of data collection.
+## Survey data and anonymity
+
+The questionnaire is in [`survey/`](survey/). The individual survey responses are **not** published. In line with the paper's data availability statement, they are available from the corresponding author on request.
+
+Anonymity was guaranteed both to the TSOs and to individual respondents. Results are reported at country level only.
 
 ## Citation
 
-If you use this repository, please cite the software:
+If you use this material, please cite the article:
 
-> Saretta, M. (2025). Designing European Hydrogen Markets (Version 0.0.1).
+```bibtex
+@article{saretta2027hydrogen,
+  title   = {Towards European hydrogen market design: Perspectives from transmission system operators},
+  author  = {Saretta, Marco and Raheli, Enrica and Kazempour, Jalal},
+  journal = {Energy Policy},
+  volume  = {220},
+  pages   = {115634},
+  year    = {2027},
+  doi     = {10.1016/j.enpol.2026.115634}
+}
+```
 
-Citation metadata is available in the CITATION.cff file in this repository.
+To cite the repository itself, use the metadata in [`CITATION.cff`](CITATION.cff) (or the "Cite this repository" button on GitHub).
 
-If you reference the research results associated with this project, please cite:
+## Acknowledgements
 
-> Saretta, M., Raheli, E., Kazempour, J. (2025). *Designing European Hydrogen Markets: Perspectives from Transmission System Operators*. Submitted to Energy Policy. DOI: [to be added upon publication]
+This work is part of the Industrial PhD project "Commoditizing green hydrogen in Europe: from efficient market design to optimal contracting and investment", funded by Innovation Fund Denmark (grant 4297-00039B), Ramboll Fonden and Ramboll Denmark A/S. We thank all the European gas TSOs who took part in the survey.
 
 ## License
 
-[To be defined]
+- **Code** (`scripts/`): [MIT](LICENSE).
+- **Paper and figures**: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), as published in *Energy Policy*.
+
+## Contact
+
+Marco Saretta, Technical University of Denmark: <mcsr@dtu.dk>

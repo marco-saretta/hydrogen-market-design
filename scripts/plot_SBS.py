@@ -10,7 +10,7 @@ df = raw_data.sort_index()
 # Pass to GW
 df = df/1e6
 
-# Display March only 
+# Display April only
 df = df[df.index.month == 4]
 
 # Prepare the plot
